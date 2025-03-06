@@ -1,0 +1,37 @@
+# 编译生成的文件
+*.o
+*.exe
+*.dll
+*.so
+*.pyc
+
+# 日志文件
+*.log
+
+# 临时文件
+*.tmp
+*.swp
+
+# IDE 相关的配置文件
+.idea/
+*.iml
+.vscode/
+
+# 操作系统相关的文件
+.DS_Store
+Thumbs.db
+
+
+# vendor 目录 (如果你是 Go 项目)
+vendor/
+
+# 忽略所有 .txt 文件，但保留 README.txt
+*.txt
+!README.txt
+
+# 忽略 build 目录下的所有内容
+build/
+
+# 忽略特定文件
+config.ini
+secret.key

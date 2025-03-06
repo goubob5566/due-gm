@@ -1,0 +1,349 @@
+basePath: /
+definitions:
+  http.Resp:
+    properties:
+      code:
+        description: 响应码
+        type: integer
+      data:
+        description: 响应数据
+      message:
+        description: 响应消息
+        type: string
+    type: object
+  model.Article:
+    properties:
+      cateid:
+        type: string
+      id:
+        type: string
+      title:
+        type: string
+    type: object
+  model.Cate:
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+    type: object
+  model.UUser:
+    properties:
+      username:
+        type: string
+      uuid:
+        type: string
+    type: object
+  model.User:
+    properties:
+      password:
+        type: string
+      username:
+        type: string
+      uuid:
+        type: string
+    type: object
+  pb.CreateArticleReq:
+    properties:
+      cateid:
+        type: string
+      title:
+        type: string
+    type: object
+  pb.CreateCateReq:
+    properties:
+      name:
+        type: string
+    type: object
+  pb.DeleteArticleReq:
+    properties:
+      id:
+        type: string
+    type: object
+  pb.LoginReq:
+    properties:
+      password:
+        type: string
+      username:
+        type: string
+    type: object
+  pb.RegisterReq:
+    properties:
+      password:
+        type: string
+      username:
+        type: string
+    type: object
+  pb.UpdateArticleReq:
+    properties:
+      cateid:
+        type: string
+      id:
+        type: string
+      title:
+        type: string
+    type: object
+  pb.UpdateCateReq:
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact: {}
+  title: API文档
+  version: "1.0"
+paths:
+  /createarticle:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 请求参数
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/pb.CreateArticleReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 响应参数
+          schema:
+            allOf:
+            - $ref: '#/definitions/http.Resp'
+            - properties:
+                Data:
+                  $ref: '#/definitions/model.Article'
+              type: object
+      summary: 创建文章
+      tags:
+      - 文章
+  /createcate:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 请求参数
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/pb.CreateCateReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 响应参数
+          schema:
+            allOf:
+            - $ref: '#/definitions/http.Resp'
+            - properties:
+                Data:
+                  $ref: '#/definitions/model.Cate'
+              type: object
+      summary: 创建分类
+      tags:
+      - 分类
+  /deletearticle:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 请求参数
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/pb.DeleteArticleReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 响应参数
+          schema:
+            allOf:
+            - $ref: '#/definitions/http.Resp'
+            - properties:
+                Data:
+                  type: string
+              type: object
+      summary: 删除文章
+      tags:
+      - 文章
+  /deletecate:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 请求参数
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/pb.UpdateCateReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 响应参数
+          schema:
+            allOf:
+            - $ref: '#/definitions/http.Resp'
+            - properties:
+                Data:
+                  type: string
+              type: object
+      summary: 删除分类
+      tags:
+      - 分类
+  /login:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 请求参数
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/pb.LoginReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 响应参数
+          schema:
+            allOf:
+            - $ref: '#/definitions/http.Resp'
+            - properties:
+                Data:
+                  $ref: '#/definitions/model.User'
+              type: object
+      summary: 登陆接口
+      tags:
+      - 用户
+  /readarticle:
+    get:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 响应参数
+          schema:
+            allOf:
+            - $ref: '#/definitions/http.Resp'
+            - properties:
+                Data:
+                  items:
+                    $ref: '#/definitions/model.Article'
+                  type: array
+              type: object
+      summary: 读取文章
+      tags:
+      - 文章
+  /readcate:
+    get:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 响应参数
+          schema:
+            allOf:
+            - $ref: '#/definitions/http.Resp'
+            - properties:
+                Data:
+                  items:
+                    $ref: '#/definitions/model.Cate'
+                  type: array
+              type: object
+      summary: 获取分类
+      tags:
+      - 分类
+  /register:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 请求参数
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/pb.RegisterReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 响应参数
+          schema:
+            allOf:
+            - $ref: '#/definitions/http.Resp'
+            - properties:
+                Data:
+                  $ref: '#/definitions/model.UUser'
+              type: object
+      summary: 注册接口
+      tags:
+      - 用户
+  /updatearticle:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 请求参数
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/pb.UpdateArticleReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 响应参数
+          schema:
+            allOf:
+            - $ref: '#/definitions/http.Resp'
+            - properties:
+                Data:
+                  $ref: '#/definitions/model.Article'
+              type: object
+      summary: 更新文章
+      tags:
+      - 文章
+  /updatecate:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 请求参数
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/pb.UpdateCateReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 响应参数
+          schema:
+            allOf:
+            - $ref: '#/definitions/http.Resp'
+            - properties:
+                Data:
+                  $ref: '#/definitions/model.Cate'
+              type: object
+      summary: 更新分类
+      tags:
+      - 分类
+swagger: "2.0"
